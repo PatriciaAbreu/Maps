@@ -16,6 +16,7 @@
 		4D0014C01AA2406400FE3CC3 /* MapaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D0014BF1AA2406400FE3CC3 /* MapaTests.m */; };
 		4D0014CA1AA2434B00FE3CC3 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D0014C91AA2434B00FE3CC3 /* MapKit.framework */; };
 		4D0014CC1AA2435400FE3CC3 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D0014CB1AA2435400FE3CC3 /* CoreLocation.framework */; };
+		4D6136F11AA258E500191EFC /* PontoNoMapa.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D6136F01AA258E500191EFC /* PontoNoMapa.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,8 @@
 		4D0014BF1AA2406400FE3CC3 /* MapaTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapaTests.m; sourceTree = "<group>"; };
 		4D0014C91AA2434B00FE3CC3 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		4D0014CB1AA2435400FE3CC3 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		4D6136EF1AA258E500191EFC /* PontoNoMapa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PontoNoMapa.h; sourceTree = "<group>"; };
+		4D6136F01AA258E500191EFC /* PontoNoMapa.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PontoNoMapa.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +96,8 @@
 				4D0014A81AA2406300FE3CC3 /* AppDelegate.m */,
 				4D0014AA1AA2406300FE3CC3 /* ViewController.h */,
 				4D0014AB1AA2406300FE3CC3 /* ViewController.m */,
+				4D6136EF1AA258E500191EFC /* PontoNoMapa.h */,
+				4D6136F01AA258E500191EFC /* PontoNoMapa.m */,
 				4D0014AD1AA2406300FE3CC3 /* Main.storyboard */,
 				4D0014B01AA2406300FE3CC3 /* Images.xcassets */,
 				4D0014B21AA2406300FE3CC3 /* LaunchScreen.xib */,
@@ -227,6 +232,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D6136F11AA258E500191EFC /* PontoNoMapa.m in Sources */,
 				4D0014AC1AA2406300FE3CC3 /* ViewController.m in Sources */,
 				4D0014A91AA2406300FE3CC3 /* AppDelegate.m in Sources */,
 				4D0014A61AA2406300FE3CC3 /* main.m in Sources */,
@@ -422,6 +428,7 @@
 				4D0014C51AA2406400FE3CC3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4D0014C61AA2406400FE3CC3 /* Build configuration list for PBXNativeTarget "MapaTests" */ = {
 			isa = XCConfigurationList;
@@ -430,6 +437,7 @@
 				4D0014C81AA2406400FE3CC3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

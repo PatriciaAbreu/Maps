@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "PontoNoMapa.h"
 
 @interface ViewController ()
 
@@ -47,7 +48,6 @@
 //    informa para iniciar a procura da localização imediatamente
     [locationManager startUpdatingLocation];
     
-    
     // Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -70,6 +70,10 @@
     
 //    muda a região atual para a visualização de modo animado
     [mapa setRegion:region animated:YES];
+    
+    PontoNoMapa *pm = [[PontoNoMapa alloc] initWithCoordinate:loc title:@"I`m here!"];
+    
+    [mapa addAnnotation:pm];
     
     [locationManager stopUpdatingLocation];
 
