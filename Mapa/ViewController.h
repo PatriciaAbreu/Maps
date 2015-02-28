@@ -7,9 +7,23 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
+#import <MapKit/MapKit.h>
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController <CLLocationManagerDelegate>
 
+
+// declara uma instancia da classe MKMapView
+@property (weak, nonatomic) IBOutlet MKMapView *mapa;
+
+//    CLLocationManager - classe de interface com o hardware de localização do dispositivo
+@property (retain) CLLocationManager *locationManager;
+
+// Segmented Control - botão divido que mostra os tipos de mapas
+- (IBAction)tiposDeVisualizacoesDoMapa:(id)sender;
+
+//Button para atualizar o mapa
+- (IBAction)atualizar:(id)sender;
 
 @end
 
