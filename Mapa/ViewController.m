@@ -15,7 +15,11 @@
 
 @implementation ViewController
 
-@synthesize mapa, locationManager;
+@synthesize mapa, locationManager, mapaTap;
+
+PontoNoMapa *pm;
+CLLocationCoordinate2D loc;
+
 
 - (void)viewDidLoad {
     
@@ -29,15 +33,18 @@
     
 //    informa que a propriedade delegate do locationManager deve ser a instancia de ViewController
     [locationManager setDelegate:self];
+   
+//    usado para tocar na tela e adicionar o PIN
+    mapaTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tocar:)];
+    
+    [self.mapa addGestureRecognizer:mapaTap];
     
 //    sinaliza a localização no mapa (circulo azul)
     self.mapa.showsUserLocation = YES;
     
+//    informa que o delegate é o View Controller
     [locationManager setDelegate:self];
     
-//    mapa.mapType = MKMapTypeHybrid;
-//    mapa.mapType = MKMapTypeSatellite;
-//    mapa.mapType = MKMapTypeStandard;
     
 //    permite a autorizaçao para utilização do simulador
     if ([self->locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
@@ -56,14 +63,16 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma master
+#pragma mark
 
 -(void) locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
    
+    location = locations;
+    
      NSLog(@"%@", [locations lastObject]);
     
 //    encontra as coordenadas da localização atual
-    CLLocationCoordinate2D loc = [[locations lastObject]coordinate];
+    loc = [[locations lastObject]coordinate];
     
 //    determina a regiao da localização atual e delimita o zoom
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(loc, 250, 250);
@@ -71,9 +80,9 @@
 //    muda a região atual para a visualização de modo animado
     [mapa setRegion:region animated:YES];
     
-    PontoNoMapa *pm = [[PontoNoMapa alloc] initWithCoordinate:loc title:@"I`m here!"];
+//     pm = [[PontoNoMapa alloc] initWithCoordinate:loc title:@"I`m here!"];
     
-    [mapa addAnnotation:pm];
+//    [mapa addAnnotation:pm];
     
     [locationManager stopUpdatingLocation];
 
@@ -88,6 +97,45 @@
 // botão para atualizar a localização no mapa
 - (IBAction)atualizar:(id)sender {
     [locationManager startUpdatingLocation];
+}
+
+- (IBAction)marcarLocalizacao:(id)sender {
+    
+    [locationManager startUpdatingLocation];
+    
+    CLLocationCoordinate2D loc = [[location lastObject] coordinate];
+    
+    //Instanciar o MKPointAnnotation
+    MKPointAnnotation *pm = [[MKPointAnnotation alloc]init];
+    
+    //Outra forma de Determinar a localização do MKPointAnnotation
+    [pm setCoordinate: loc];
+    
+    [pm setTitle:@"You're here! 😁"];
+    
+    //Adicionar pm ao mapa
+    [mapa addAnnotation:pm];
+}
+
+// método que implementa o PIN quando a tela é tocada
+-(void) tocar:(UITapGestureRecognizer *)gestureRecognizer
+{
+//    identifica o ponto em que a tela foi tocada
+    CGPoint touchPoint = [gestureRecognizer locationInView:self.mapa];
+    
+//    converte o ponto para coordenadas (latitude e longitude)
+    CLLocationCoordinate2D toque = [self.mapa convertPoint:touchPoint toCoordinateFromView:self.mapa];
+
+    NSLog(@"Localização do mapa: %f %f", toque.latitude, toque.longitude );
+    
+//    instancia PIN
+    MKPointAnnotation *pm = [[MKPointAnnotation alloc] init];
+    
+//    atribui as coordenadas de onde a tela foi tocada para o PIN
+    pm.coordinate = toque;
+    
+//    acrescenta o PIN na tela
+    [mapa addAnnotation:pm];
 }
 
 // botão que mostra os tipos de mapas (Padrão, Hibrido ou Satelite)
@@ -106,4 +154,7 @@
             break;
     }
 }
+
+
+
 @end

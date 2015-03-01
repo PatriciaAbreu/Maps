@@ -18,22 +18,14 @@
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="bYV-WQ-pz3">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <gestureRecognizers/>
                                 <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="79" y="90" width="230" height="290"/>
-                                </variation>
-                            </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A6j-Oq-621">
-                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                <state key="normal" title="Atualizar Localização">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="116" y="407" width="145" height="30"/>
+                                    <rect key="frame" x="85" y="88" width="230" height="290"/>
                                 </variation>
                                 <connections>
-                                    <action selector="atualizar:" destination="BYZ-38-t0r" eventType="touchUpInside" id="uCX-qy-J1o"/>
+                                    <outletCollection property="gestureRecognizers" destination="h2o-Kd-Eol" appends="YES" id="wqb-kk-iqn"/>
                                 </connections>
-                            </button>
+                            </mapView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="sVJ-Zr-mmy">
                                 <rect key="frame" x="-61" y="-14" width="123" height="29"/>
                                 <segments>
@@ -48,28 +40,60 @@
                                     <action selector="tiposDeVisualizacoesDoMapa:" destination="BYZ-38-t0r" eventType="valueChanged" id="lxe-N8-elx"/>
                                 </connections>
                             </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lkT-j7-HVp">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" title="Marcar Localização">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="224" y="410" width="134" height="30"/>
+                                </variation>
+                                <connections>
+                                    <action selector="marcarLocalizacao:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bFU-XR-icU"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A6j-Oq-621">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" title="Atualizar Localização">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="50" y="410" width="145" height="30"/>
+                                </variation>
+                                <connections>
+                                    <action selector="atualizar:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4ah-xz-eL1"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="bYV-WQ-pz3"/>
-                                <exclude reference="A6j-Oq-621"/>
                                 <exclude reference="sVJ-Zr-mmy"/>
+                                <exclude reference="lkT-j7-HVp"/>
+                                <exclude reference="A6j-Oq-621"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
                             <mask key="subviews">
                                 <include reference="bYV-WQ-pz3"/>
-                                <include reference="A6j-Oq-621"/>
                                 <include reference="sVJ-Zr-mmy"/>
+                                <include reference="lkT-j7-HVp"/>
+                                <include reference="A6j-Oq-621"/>
                             </mask>
                         </variation>
                     </view>
                     <connections>
                         <outlet property="mapa" destination="bYV-WQ-pz3" id="K1q-RS-9jX"/>
+                        <outlet property="mapaTap" destination="h2o-Kd-Eol" id="F7s-fb-ZkO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="h2o-Kd-Eol">
+                    <connections>
+                        <action selector="toque:" destination="BYZ-38-t0r" id="5qv-Bb-xb1"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="244.5" y="306"/>
         </scene>

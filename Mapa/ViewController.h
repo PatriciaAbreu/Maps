@@ -10,8 +10,11 @@
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
 
-@interface ViewController : UIViewController <CLLocationManagerDelegate, MKMapViewDelegate>
 
+@interface ViewController : UIViewController <CLLocationManagerDelegate, MKMapViewDelegate>
+{
+    NSArray *location;
+}
 
 // declara uma instancia da classe MKMapView
 @property (weak, nonatomic) IBOutlet MKMapView *mapa;
@@ -19,6 +22,8 @@
 //    CLLocationManager - classe de interface com o hardware de localização do dispositivo
 @property (retain) CLLocationManager *locationManager;
 
+// Outlet do mapa
+@property (strong, nonatomic) IBOutlet UITapGestureRecognizer *mapaTap;
 
 // Segmented Control - botão divido que mostra os tipos de mapas
 - (IBAction)tiposDeVisualizacoesDoMapa:(id)sender;
@@ -26,6 +31,13 @@
 //Button para atualizar o mapa
 - (IBAction)atualizar:(id)sender;
 
+// Button para marcar com o PIN a localização no mapa
+- (IBAction)marcarLocalizacao:(id)sender;
+
+// Tap Gesture Recognizer - identifica toque na tela
+- (IBAction)toque:(id)sender;
+
+-(void) tocar:(UITapGestureRecognizer *)gestureRecognizer;
 
 @end
 
