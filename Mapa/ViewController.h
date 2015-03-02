@@ -25,6 +25,9 @@
 // Outlet do mapa
 @property (strong, nonatomic) IBOutlet UITapGestureRecognizer *mapaTap;
 
+@property NSMutableArray *pontosRota;
+@property MKPolyline *antigaLinha;
+
 // Segmented Control - botão divido que mostra os tipos de mapas
 - (IBAction)tiposDeVisualizacoesDoMapa:(id)sender;
 

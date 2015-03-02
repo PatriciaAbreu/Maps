@@ -15,7 +15,7 @@
 
 @implementation ViewController
 
-@synthesize mapa, locationManager, mapaTap;
+@synthesize mapa, locationManager, mapaTap, pontosRota, antigaLinha;
 
 PontoNoMapa *pm;
 CLLocationCoordinate2D loc;
@@ -24,6 +24,10 @@ CLLocationCoordinate2D loc;
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    
+    [mapa setDelegate:self];
+    
+    pontosRota = [[NSMutableArray alloc]init];
     
 //    alocanção de memória para a variavel locationManager
     locationManager = [[CLLocationManager alloc]init];
@@ -80,11 +84,15 @@ CLLocationCoordinate2D loc;
 //    muda a região atual para a visualização de modo animado
     [mapa setRegion:region animated:YES];
     
+    [pontosRota addObject:[locations lastObject]];
+//    desenha rota atraves do método
+    [self drawRoute: pontosRota];
+    
 //     pm = [[PontoNoMapa alloc] initWithCoordinate:loc title:@"I`m here!"];
     
 //    [mapa addAnnotation:pm];
     
-    [locationManager stopUpdatingLocation];
+//    [locationManager stopUpdatingLocation];
 
 }
 
@@ -97,6 +105,7 @@ CLLocationCoordinate2D loc;
 // botão para atualizar a localização no mapa
 - (IBAction)atualizar:(id)sender {
     [locationManager startUpdatingLocation];
+    [self drawRoute:pontosRota];
 }
 
 - (IBAction)marcarLocalizacao:(id)sender {
@@ -156,5 +165,34 @@ CLLocationCoordinate2D loc;
 }
 
 
+-(void) drawRoute:(NSMutableArray *) pontos
+{
+    if (nil != antigaLinha) {
+        [mapa removeOverlay:antigaLinha];
+    }
+    CLLocationCoordinate2D coordenadas[pontos.count];
+    for (int i = 0; i < pontos.count; i++){
+        CLLocation *local = [pontos objectAtIndex:i];
+        CLLocationCoordinate2D coordenada = local.coordinate;
+        
+        coordenadas[i] = coordenada;
+    }
+    MKPolyline *polyLine = [MKPolyline polylineWithCoordinates:coordenadas count:pontos.count];
+    antigaLinha = polyLine;
+    [mapa addOverlay:polyLine];
+}
+
+-(MKOverlayRenderer *) mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay
+{
+    if ([overlay isKindOfClass:[MKPolyline class]]) {
+        MKPolylineRenderer *renderer = [[MKPolylineRenderer alloc] initWithPolyline:overlay];
+        
+        renderer.strokeColor = [[UIColor greenColor] colorWithAlphaComponent:0.7];
+        renderer.lineWidth = 3;
+        
+        return renderer;
+    }
+    return nil;
+}
 
 @end
